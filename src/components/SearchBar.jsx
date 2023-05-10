@@ -1,15 +1,18 @@
 import React from 'react'
 import ProductsPage from './ProductsPage'
 
-function SearchBar({filter}) {
+function SearchBar({filterProducts}) {
 
-    const handleChange = (e) => {filter(e.target.value)}
+    // Handle Search Bar Input Change
+    const handleInputChange = (event) => {
+      filterProducts(event.target.value);
+    };
     
   return (
     <div> <input
     type="text"
     placeholder="Search"
-    onChange={handleChange}
+    onChange={handleInputChange}
   /></div>
   )
 }

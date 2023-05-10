@@ -4,28 +4,26 @@ import SearchBar from './SearchBar';
 import ProductsTable from './ProductsTable';
 
 function ProductsPage () {
-  const [products, setProducts] = useState(jsonData);
-  const [filteredProducts, setfilteredProducts] = useState(products)
-  const [searchTerm, setSearchTerm] = useState("")
-
-  const handleChange = (e) => {
-    const searchQuery = e.target.value
-    setSearchTerm(searchQuery)
-
-    const filterProducts = products.filter((productItem) => {
-        return productItem.name.includes(searchTerm)
-    })
-    setfilteredProducts(filterProducts)
+    // State for the products
+    const [products, setProducts] = useState(jsonData);
+  // State for the filtered products
+  const [filteredProducts, setFilteredProducts] = useState(products);
+  
+  const filterProducts = (search) => {
+    const filtered = products.filter((product) =>
+      product.name.toLowerCase().includes(search.toLowerCase())
+    );
+    setFilteredProducts(filtered);
   };
-
 
   return(
       <div>
         <h1>IronStore</h1>
-        <SearchBar filter= {filteredProducts}/>
-        <ProductsTable data = {products}/>
+        <SearchBar filterProducts= {filterProducts}/>
+        <ProductsTable data = {filteredProducts}/>
       </div>    
   )
 }
 
 export default ProductsPage
+
